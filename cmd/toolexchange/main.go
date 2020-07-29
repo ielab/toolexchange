@@ -3,6 +3,7 @@ package main
 import (
 	"encoding/json"
 	"github.com/gin-gonic/gin"
+	"github.com/gin-contrib/cors"
 	"net/http"
 	"toolexchange"
 )
@@ -16,6 +17,8 @@ func main() {
 		exchanger: toolexchange.NewExchanger(),
 	}
 	router := gin.Default()
+	// TODO: Change cors config to only accept selected sources
+	router.Use(cors.Default())
 	router.POST("/exchange", s.requestToken)
 	router.GET("/exchange", s.requestItem)
 	panic(router.Run(":4040"))
@@ -47,4 +50,8 @@ func (s server) requestItem(c *gin.Context) {
 	}
 	c.Status(http.StatusOK)
 	return
+}
+
+func enableCors(w *http.ResponseWriter) {
+	(*w).Header().Set("Access-Control-Allow-Origin", "*")
 }
