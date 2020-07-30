@@ -51,7 +51,3 @@ func (s server) requestItem(c *gin.Context) {
 	c.Status(http.StatusOK)
 	return
 }
-
-func enableCors(w *http.ResponseWriter) {
-	(*w).Header().Set("Access-Control-Allow-Origin", "*")
-}
