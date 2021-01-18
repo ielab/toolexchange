@@ -1,4 +1,4 @@
-module toolexchange
+module github.com/ielab/toolexchange
 
 go 1.14
 
